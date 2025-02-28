@@ -10,3 +10,6 @@ All notable changes to the "mjsc" extension will be documented in this file.
 - Fixed adding comments inside of quotes
 - Fixed adding comments inside of comments
 - hopeful
+
+## [1.1.1]
+- Fixed regex re-adding comments rather than avoiding duplicate description
