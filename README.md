@@ -4,7 +4,7 @@ MJSC is an extension that aims to introduce some readability to [ChatTriggers](h
 
 # Installing
 
-To install this extension to your Visual Studio Code you need to download the `.vsix` file and run the `code --install-extension mjsc-1.0.0.vsix` command in a terminal.
+To install this extension to your Visual Studio Code you need to download the `.vsix` file and run the `code --install-extension mjsc-1.1.2.vsix` command in a terminal.
 
 # Building
 

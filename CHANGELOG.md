@@ -13,3 +13,6 @@ All notable changes to the "mjsc" extension will be documented in this file.
 
 ## [1.1.1]
 - Fixed regex re-adding comments rather than avoiding duplicate description
+
+## [1.1.2]
+- Fixed regex re-adding comments inside of quoted strings

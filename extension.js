@@ -1,5 +1,5 @@
 const vscode = require("vscode")
-const obfregex = /(?<!\/\/|\/\* |\*\/)(?:field_|func_|p_)\w+/g
+const obfregex = /(?<!\/\/|\/\* |\*\/\"?)(?:field_|func_|p_)\w+/g
 const obfValues = require("./mappings.json")
 const commentRegex = /((?<!")\/\/)/
 
