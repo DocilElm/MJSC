@@ -7,16 +7,21 @@ const commentRegex = /((?<!")\/\/)/
  * @param {vscode.ExtensionContext} context
  */
 const activate = (context) => {
-	const disposable = vscode.commands.registerCommand("mjsc.describemappings", () => {
+	const disposable = vscode.commands.registerCommand("mjsc.describemappings", async () => {
 		const editor = vscode.window.activeTextEditor
 		if (!editor) return
 
 		const document = editor.document
 
-		editor.edit((builder) => {
+		const res = await editor.edit((builder) => {
+			let inMultiLine = false
+
 			for (let idx = 0; idx < document.lineCount; idx++) {
 				let text = document.lineAt(idx)?.text
 				if (!text) continue
+				if (/^\/\*/.test(text)) inMultiLine = true
+				if (/^\*\//.test(text)) inMultiLine = false
+				if (inMultiLine) continue
 
 				const matches = [...text.matchAll(obfregex)]
 				if (matches.length === 0) continue
@@ -36,11 +41,11 @@ const activate = (context) => {
 					builder.insert(line, `/* ${obfValues[name]} */`)
 				})
 			}
-		}).then((success) => {
-			if (!success) return vscode.window.showErrorMessage("[MJSC] Failed to add description to the obfuscated fields/methods")
-
-			vscode.window.showInformationMessage("[MJSC] Added description to the obfuscated fields/methods")
 		})
+
+		if (!res) return vscode.window.showErrorMessage("[MJSC] Failed to add description to the obfuscated fields/methods")
+
+		vscode.window.showInformationMessage("[MJSC] Added description to the obfuscated fields/methods")
 	})
 
 	context.subscriptions.push(disposable)

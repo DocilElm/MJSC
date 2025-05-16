@@ -16,3 +16,6 @@ All notable changes to the "mjsc" extension will be documented in this file.
 
 ## [1.1.2]
 - Fixed regex re-adding comments inside of quoted strings
+
+## [1.1.3]
+- Fixed auto mapper breaking multi line comments
