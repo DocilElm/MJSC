@@ -3,11 +3,24 @@ const obfregex = /(?<!\/\/|\/\* |\*\/\"?)(?:field_|func_|p_)\w+/g
 const obfValues = require("./mappings.json")
 const commentRegex = /((?<!")\/\/)/
 
+const onSave = () => {
+	vscode.commands.executeCommand("mjsc.describemappings")
+}
+
 /**
  * @param {vscode.ExtensionContext} context
  */
 const activate = (context) => {
-	const disposable = vscode.commands.registerCommand("mjsc.describemappings", async () => {
+	const saveListener = vscode.workspace.onDidSaveTextDocument((document) => {
+		const config = vscode.workspace.getConfiguration("mjsc")
+		const state = config.get("runonsave", false)
+
+		if (!state) return
+
+		onSave()
+	})
+
+	const disposableCommand = vscode.commands.registerCommand("mjsc.describemappings", async () => {
 		const editor = vscode.window.activeTextEditor
 		if (!editor) return
 
@@ -48,7 +61,7 @@ const activate = (context) => {
 		vscode.window.showInformationMessage("[MJSC] Added description to the obfuscated fields/methods")
 	})
 
-	context.subscriptions.push(disposable)
+	context.subscriptions.push([disposableCommand, saveListener])
 }
 
 const deactivate = () => {}

@@ -19,3 +19,6 @@ All notable changes to the "mjsc" extension will be documented in this file.
 
 ## [1.1.3]
 - Fixed auto mapper breaking multi line comments
+
+## [1.1.4]
+- Added trigger on save mode to configurations
