@@ -22,3 +22,6 @@ All notable changes to the "mjsc" extension will be documented in this file.
 
 ## [1.1.4]
 - Added trigger on save mode to configurations
+
+## [1.1.5]
+- Fixed issue where multi line comments would stay enabled so no mappings would be applied if the multi line comment ended in the same string

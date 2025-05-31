@@ -32,8 +32,9 @@ const activate = (context) => {
 			for (let idx = 0; idx < document.lineCount; idx++) {
 				let text = document.lineAt(idx)?.text
 				if (!text) continue
-				if (/^\/\*/.test(text)) inMultiLine = true
-				if (/^\*\//.test(text)) inMultiLine = false
+				// Second check is to avoid keeping multi line opened if the comment ends in the same line
+				if (/^( *)?\/\*/.test(text) && !/( *)?\*\/$/.test(text)) inMultiLine = true
+				if (/^( *)?\*\//.test(text)) inMultiLine = false
 				if (inMultiLine) continue
 
 				const matches = [...text.matchAll(obfregex)]
